@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIF.AD - 思納普斯大獎賽 | 香港AI國際電影節AI原生廣告大賽</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #8e44ad;
+            --accent: #00ff9d;
+            --synapse-gold: #ffd700;
+            --synapse-silver: #c0c0c0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 20%);
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
+            100% { text-shadow: 0 0 25px rgba(0, 255, 157, 0.6), 0 0 35px rgba(52, 152, 219, 0.4); }
+        }
+        
+        .synapse-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, var(--synapse-gold), #ff6b35, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: synapseGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes synapseGlow {
+            0% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+            100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 107, 53, 0.6); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .card {
+            background-color: rgba(26, 32, 44, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 255, 157, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--synapse-gold), #ff6b35);
+            color: #000;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            animation: bgPan 30s infinite linear;
+        }
+        
+        @keyframes bgPan {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .data-stream {
+            position: absolute;
+            height: 100px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent), var(--secondary), transparent);
+            z-index: 0;
+            animation: dataStream 2s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes dataStream {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .ai-element {
+            position: absolute;
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--accent);
+            z-index: 3;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+        
+        .competition-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .competition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.25);
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(26, 32, 44, 0.5);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(26, 32, 44, 0.7);
+        }
+        
+        .stats-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .stats-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .section-title.center:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .award-badge {
+            background: linear-gradient(135deg, var(--synapse-gold), #ff6b35);
+            padding: 5px 15px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #000;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .logo-font {
+                font-size: 1.8rem;
+            }
+            
+            .synapse-logo {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                min-height: 60vh;
+            }
+            
+            /* 修正：移动设备上隐藏AI元素 */
+            .ai-element {
+                display: none;
+            }
+            
+            /* 确保英雄区文字不会被遮挡 */
+            .hero-content {
+                padding-top: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 50vh;
+            }
+            
+            .logo-font {
+                font-size: 1.5rem;
+            }
+            
+            .synapse-logo {
+                font-size: 1.8rem;
+            }
+            
+            .stats-card {
+                padding: 15px;
+            }
+            
+            .stats-card .number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AI Elements -->
+    <div class="ai-element" style="top: 120px; left: 10%;">
+        COMPETITION_STATUS: ACTIVE <br>
+        SUBMISSIONS: 2,500+ <br>
+        // AI-Native Advertising Revolution
+    </div>
+    
+    <div class="ai-element" style="bottom: 150px; right: 15%;">
+        PRIZE_POOL: $500K USD <br>
+        MARKET_SIZE: $95B <br>
+        // Global AI Ad Market 2025
+    </div>
+    
+    <!-- Data streams -->
+    <div class="data-stream" style="left: 20%; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 40%; animation-delay: 0.5s;"></div>
+    <div class="data-stream" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-center">
+                    <div class="logo-font text-lg">AIF.AD</div>
+                    <div class="text-xs text-blue-400">思納普斯大獎賽</div>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8 desktop-nav">
+                <a href="#about" class="hover:text-blue-400 transition">關於大賽</a>
+                <a href="#categories" class="hover:text-blue-400 transition">獎項類別</a>
+                <a href="#rules" class="hover:text-blue-400 transition">參賽規則</a>
+                <a href="#timeline" class="hover:text-blue-400 transition">賽程安排</a>
+                <a href="#partners" class="hover:text-blue-400 transition">合作夥伴</a>
+                <a href="#market" class="hover:text-blue-400 transition">市場機會</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#submit" class="btn-gold px-6 py-2 rounded-full text-sm font-bold">
+                    立即報名
+                </a>
+                <button class="md:hidden text-white mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <div class="mt-12 flex flex-col space-y-6">
+            <a href="#about" class="text-xl hover:text-blue-400 transition">關於大賽</a>
+            <a href="#categories" class="text-xl hover:text-blue-400 transition">獎項類別</a>
+            <a href="#rules" class="text-xl hover:text-blue-400 transition">參賽規則</a>
+            <a href="#timeline" class="text-xl hover:text-blue-400 transition">賽程安排</a>
+            <a href="#partners" class="text-xl hover:text-blue-400 transition">合作夥伴</a>
+            <a href="#market" class="text-xl hover:text-blue-400 transition">市場機會</a>
+            
+            <div class="pt-6 border-t border-gray-700">
+                <button class="btn-gold w-full py-3 rounded-lg font-bold text-center">
+                    立即報名
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-4xl animate-fade-in">
+                <div class="text-center mb-8">
+                    <div class="synapse-logo mb-4">SYNAPSE</div>
+                    <div class="text-2xl md:text-3xl font-bold text-blue-400 mb-2">思納普斯大獎賽</div>
+                    <div class="text-lg text-gray-300">香港AI國際電影節AI原生廣告大賽</div>
+                </div>
+                
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 text-center">
+                    重新定義廣告的未來
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 text-center max-w-3xl mx-auto">
+                    全球首個專注於AI原生廣告的權威競賽平台。當品牌精神成為世界法則，當創意與技術深度融合，當觀眾從旁觀者變成參與者——這就是廣告的未來。
+                </p>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center mb-12">
+                    <a href="#submit" class="btn-gold px-8 py-4 rounded-full font-bold text-center text-lg">
+                        立即報名參賽
+                    </a>
+                    <a href="#about" class="btn-secondary px-8 py-4 rounded-full font-medium text-center text-lg">
+                        了解更多
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-card">
+                        <i class="fas fa-trophy"></i>
+                        <div class="number">$50萬</div>
+                        <div class="text-sm">總獎金池</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-globe"></i>
+                        <div class="number">50+</div>
+                        <div class="text-sm">參與國家</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="number">$950億</div>
+                        <div class="text-sm">AI廣告市場</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-users"></i>
+                        <div class="number">2,500+</div>
+                        <div class="text-sm">預期作品</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20" id="about">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">什麼是AI原生廣告？</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    AI原生廣告不是在現有內容中植入品牌，而是讓品牌精神成為生成世界的初始參數和核心驅動力。這是從「AI賦能」到「AI原生」的根本性轉變。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                <div class="card p-8 animate-slide-up">
+                    <div class="text-red-400 mb-4">
+                        <i class="fas fa-times-circle text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-red-400">AI賦能廣告</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p>• 在已完成的影片中使用AI工具替換道具</p>
+                        <p>• 使用AI算法提升影片畫質</p>
+                        <p>• AI只是「附加功能」或「增強工具」</p>
+                        <p>• 移除AI模塊，作品依然成立</p>
+                    </div>
+                    <div class="mt-6">
+                        <span class="bg-red-500 bg-opacity-20 text-red-400 px-3 py-1 rounded-full text-sm">舊模式</span>
+                    </div>
+                </div>
+                
+                <div class="card p-8 animate-slide-up">
+                    <div class="text-green-400 mb-4">
+                        <i class="fas fa-check-circle text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-green-400">AI原生廣告</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p>• 品牌理念成為生成世界的基本參數</p>
+                        <p>• 整個叙事從品牌DNA中「生長」出來</p>
+                        <p>• AI是整個系統的「心臟」和「基石」</p>
+                        <p>• 移除AI模型，整個作品將不復存在</p>
+                    </div>
+                    <div class="mt-6">
+                        <span class="bg-green-500 bg-opacity-20 text-green-400 px-3 py-1 rounded-full text-sm">新範式</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8 animate-fade-in">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">創意指令的革命</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 text-red-400">過去的指令</h4>
+                        <div class="bg-red-500 bg-opacity-10 border border-red-500 border-opacity-30 rounded-lg p-4">
+                            <p class="text-gray-300">「製作一部精彩的影片，然後把我們的產品放進去。」</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 text-green-400">現在的指令</h4>
+                        <div class="bg-green-500 bg-opacity-10 border border-green-500 border-opacity-30 rounded-lg p-4">
+                            <p class="text-gray-300">「以我們品牌的精髓為種子——例如，Nike的'Just Do It'精神——去生成一個世界、一個故事，讓這個精神成為該世界的物理法則和叙事動力。」</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-900 to-purple-900" id="market">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6">巨大的市場機會</h2>
+                <p class="text-xl text-gray-200 max-w-3xl mx-auto">
+                    AI廣告市場正處於爆發式增長期，我們正站在這場革命的最前沿
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="card p-8 text-center animate-slide-up">
+                    <div class="text-5xl font-bold gradient-text mb-4">$950億</div>
+                    <h3 class="text-xl font-semibold mb-2">2025年市場規模</h3>
+                    <p class="text-gray-300">全球AI廣告市場預計規模</p>
+                    <div class="mt-4">
+                        <span class="text-green-400 font-semibold">+39.7% 年增長率</span>
+                    </div>
+                </div>
+                
+                <div class="card p-8 text-center animate-slide-up">
+                    <div class="text-5xl font-bold gradient-text mb-4">$3,200億</div>
+                    <h3 class="text-xl font-semibold mb-2">2030年預測規模</h3>
+                    <p class="text-gray-300">未來五年市場前景</p>
+                    <div class="mt-4">
+                        <span class="text-blue-400 font-semibold">34% 亞太市場佔比</span>
+                    </div>
+                </div>
+                
+                <div class="card p-8 text-center animate-slide-up">
+                    <div class="text-5xl font-bold gradient-text mb-4">67%</div>
+                    <h3 class="text-xl font-semibold mb-2">數位人廣告增長</h3>
+                    <p class="text-gray-300">虛擬代言人市場年增長率</p>
+                    <div class="mt-4">
+                        <span class="text-purple-400 font-semibold">最高增長細分市場</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="card p-8 animate-fade-in">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">細分市場機會</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                            <span>程序化廣告</span>
+                            <span class="text-green-400 font-semibold">+45% 年增長</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                            <span>個性化內容</span>
+                            <span class="text-green-400 font-semibold">+52% 年增長</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                            <span>交互式廣告</span>
+                            <span class="text-green-400 font-semibold">+38% 年增長</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                            <span>數位人廣告</span>
+                            <span class="text-green-400 font-semibold">+67% 年增長</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 animate-fade-in">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">香港獨特優勢</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">國際金融中心</h4>
+                                <p class="text-gray-300 text-sm">資本流動便利，投資環境優越</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">東西文化交匯</h4>
+                                <p class="text-gray-300 text-sm">創意視野開闊，文化包容性強</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">法律體系完善</h4>
+                                <p class="text-gray-300 text-sm">知識產權保護到位</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">地理位置優越</h4>
+                                <p class="text-gray-300 text-sm">輻射亞太市場，連接全球</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition Categories Section -->
+    <section class="py-20" id="categories">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">獎項類別</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    多元化的獎項設置，全面覆蓋AI原生廣告的各個創新領域
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Grand Prize -->
+                <div class="competition-card card p-8 border-2 border-yellow-500 animate-slide-up">
+                    <div class="award-badge">全場大獎</div>
+                    <h3 class="text-3xl font-bold mb-4 text-yellow-400">思納普斯大獎賽全場大獎</h3>
+                    <div class="text-4xl font-bold text-yellow-400 mb-4">$5萬美元</div>
+                    <p class="text-gray-300 mb-6">
+                        頒發給總分最高的作品，它完美融合了強大的品牌理念、震撼的創意執行和開創性的技術創新，代表AI原生品牌未來主義的最高成就。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-trophy text-yellow-400 mr-2"></i>
+                            <span>現金獎勵：$5萬美元</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            <span>技術大獎包（AI工具積分）</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-handshake text-yellow-400 mr-2"></i>
+                            <span>投資者見面會機會</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Special Award -->
+                <div class="competition-card card p-8 animate-slide-up">
+                    <div class="award-badge">特別獎項</div>
+                    <h3 class="text-2xl font-bold mb-4 gradient-text">虛幻引擎技術卓越獎</h3>
+                    <div class="text-2xl font-bold text-blue-400 mb-4">Epic Games贊助</div>
+                    <p class="text-gray-300 mb-6">
+                        由Epic Games贊助，頒發給在實時渲染、物理模擬和沉浸感方面，實現了最驚豔、最前沿技術應用的作品。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-gamepad text-blue-400 mr-2"></i>
+                            <span>UE5高級許可證</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-cloud text-blue-400 mr-2"></i>
+                            <span>雲端渲染積分</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap text-blue-400 mr-2"></i>
+                            <span>技術培訓機會</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gold Pencil Awards -->
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">金鉛筆獎</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">生成性共生</h4>
+                    <div class="text-lg font-bold text-green-400 mb-3">$1萬美元</div>
+                    <p class="text-gray-300 text-sm">
+                        頒發給將品牌精髓最無縫、最深刻地融入生成世界與叙事結構的作品。
+                    </p>
+                </div>
+                
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">金鉛筆獎</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">交互式體驗</h4>
+                    <div class="text-lg font-bold text-green-400 mb-3">$1萬美元</div>
+                    <p class="text-gray-300 text-sm">
+                        頒發給在觀眾互動、個性化或動態內容方面最具吸引力和創新性的作品。
+                    </p>
+                </div>
+                
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">金鉛筆獎</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">最佳品牌即角色</h4>
+                    <div class="text-lg font-bold text-green-400 mb-3">$1萬美元</div>
+                    <p class="text-gray-300 text-sm">
+                        頒發給將品牌AI驅動的數位人或IP作為交互式角色，並取得最富創意成果的作品。
+                    </p>
+                </div>
+                
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">金鉛筆獎</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">創意提示詞與流程工藝</h4>
+                    <div class="text-lg font-bold text-green-400 mb-3">$1萬美元</div>
+                    <p class="text-gray-300 text-sm">
+                        頒發給通過最複雜、最巧妙的提示詞和技術棧組合，實現獨特創意願景的作品。
+                    </p>
+                </div>
+                
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">觀眾獎</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">觀眾選擇獎</h4>
+                    <div class="text-lg font-bold text-purple-400 mb-3">公眾投票</div>
+                    <p class="text-gray-300 text-sm">
+                        在電影節期間，由公眾在線體驗交互式作品後投票選出最具吸引力的作品。
+                    </p>
+                </div>
+                
+                <div class="competition-card card p-6 animate-slide-up">
+                    <div class="award-badge">技術創新</div>
+                    <h4 class="text-xl font-bold mb-3 gradient-text">AI技術突破獎</h4>
+                    <div class="text-lg font-bold text-blue-400 mb-3">技術認證</div>
+                    <p class="text-gray-300 text-sm">
+                        表彰在AI技術應用上展現突破性創新和卓越工藝的作品。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules and Requirements Section -->
+    <section class="py-20 bg-gray-900" id="rules">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">參賽規則與要求</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    明確的參賽標準，確保競賽的公平性和專業性
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                <div class="card p-8 animate-slide-up">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">參賽資格</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-users text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">團隊要求</h4>
+                                <p class="text-gray-300 text-sm">每個團隊必須至少包含一個創意實體（個人、代理公司、工作室）和一個官方品牌合作夥伴</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-globe text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">全球開放</h4>
+                                <p class="text-gray-300 text-sm">面向全球所有創作者、廣告代理和品牌方開放</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">AI原生認證</h4>
+                                <p class="text-gray-300 text-sm">作品必須符合AI原生標準，AI技術參與度不低於40%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 animate-slide-up">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">提交要求</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-video text-green-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">創意作品</h4>
+                                <p class="text-gray-300 text-sm">可以是線性視頻文件（4K，最長5分鐘）或交互式體驗（可執行文件或URL）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-file-alt text-green-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">流程文檔（必需）</h4>
+                                <p class="text-gray-300 text-sm">不超過10頁的PDF，詳述創作流程、AI工具使用和品牌整合方式</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-play-circle text-green-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold">案例研究視頻（推薦）</h4>
+                                <p class="text-gray-300 text-sm">2分鐘視頻，解釋項目背景、創意和成果</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8 animate-fade-in">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">評審標準</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">40%</div>
+                        <h4 class="font-semibold mb-2">概念共生性</h4>
+                        <p class="text-gray-300 text-sm">品牌理念與創意概念的融合深度</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400 mb-2">20%</div>
+                        <h4 class="font-semibold mb-2">創意與美學執行</h4>
+                        <p class="text-gray-300 text-sm">作品的藝術質量和情感冲擊力</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">20%</div>
+                        <h4 class="font-semibold mb-2">技術創新與工藝</h4>
+                        <p class="text-gray-300 text-sm">AI技術使用的新穎性和複雜性</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-yellow-400 mb-2">10%</div>
+                        <h4 class="font-semibold mb-2">觀眾參與潛力</h4>
+                        <p class="text-gray-300 text-sm">創造有意義體驗的能力</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-red-400 mb-2">10%</div>
+                        <h4 class="font-semibold mb-2">商業效能</h4>
+                        <p class="text-gray-300 text-sm">品牌價值傳達的有效性</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="py-20" id="tech">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">支持的技術棧</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    全球頂尖的AI工具和技術平台，為創作者提供最強大的創意支持
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-video text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">視頻生成</h3>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <div>OpenAI Sora</div>
+                        <div>快手可靈 (Kling)</div>
+                        <div>Google Veo</div>
+                        <div>Runway ML</div>
+                        <div>Pika Labs</div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-image text-4xl text-green-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">圖像生成</h3>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <div>DALL-E 3</div>
+                        <div>Midjourney</div>
+                        <div>Stable Diffusion</div>
+                        <div>Adobe Firefly</div>
+                        <div>Leonardo AI</div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-microphone text-4xl text-purple-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">音頻生成</h3>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <div>ElevenLabs</div>
+                        <div>Suno AI</div>
+                        <div>AIVA</div>
+                        <div>Mubert</div>
+                        <div>Boomy</div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-cube text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">3D與互動</h3>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <div>Unreal Engine 5</div>
+                        <div>Unity</div>
+                        <div>NVIDIA ACE</div>
+                        <div>Meta VR</div>
+                        <div>WebXR</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8 animate-fade-in">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">技術支持服務</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 text-blue-400">
+                            <i class="fas fa-cloud mr-2"></i>
+                            雲端創作環境
+                        </h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li>• 高端GPU雲端工作站</li>
+                            <li>• 預裝主流AI模型</li>
+                            <li>• 實時協作工具</li>
+                            <li>• 分佈式渲染支持</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 text-green-400">
+                            <i class="fas fa-graduation-cap mr-2"></i>
+                            技術培訓
+                        </h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li>• 在線學習平台</li>
+                            <li>• 專家講座和工作坊</li>
+                            <li>• 一對一技術指導</li>
+                            <li>• 全球技術分享會</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 text-purple-400">
+                            <i class="fas fa-headset mr-2"></i>
+                            24/7技術支持
+                        </h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li>• 多語言技術支持團隊</li>
+                            <li>• 實時在線聊天</li>
+                            <li>• 遠程技術協助</li>
+                            <li>• 豐富的教程資源庫</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 bg-gray-900" id="timeline">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">2025-2026年賽程安排</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    精心安排的競賽時程，確保參賽者有充足時間創作出卓越作品
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-8">
+                        <div class="timeline-item animate-slide-up">
+                            <div class="bg-blue-500 bg-opacity-20 p-4 rounded-lg">
+                                <h3 class="text-lg font-bold text-blue-400 mb-2">2025年10月：項目啟動</h3>
+                                <div class="space-y-2 text-sm text-gray-300">
+                                    <div>• 10月1日：正式對外宣布競賽啟動</div>
+                                    <div>• 10月15日：香港AI國際電影節正式發布</div>
+                                    <div>• 10月20日：官方網站正式上線</div>
+                                    <div>• 10月25日：技術合作夥伴簽約儀式</div>
+                                    <div>• 10月31日：評審委員會成員確認</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item animate-slide-up">
+                            <div class="bg-green-500 bg-opacity-20 p-4 rounded-lg">
+                                <h3 class="text-lg font-bold text-green-400 mb-2">2025年11-12月：宣傳推廣</h3>
+                                <div class="space-y-2 text-sm text-gray-300">
+                                    <div>• 11月：全球媒體宣傳週</div>
+                                    <div>• 11月15日：技術培訓體系上線</div>
+                                    <div>• 12月：全球路演活動啟動</div>
+                                    <div>• 12月15日：早鳥報名優惠活動</div>
+                                    <div>• 12月31日：首批品牌合作夥伴確認</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <div class="timeline-item animate-slide-up">
+                            <div class="bg-purple-500 bg-opacity-20 p-4 rounded-lg">
+                                <h3 class="text-lg font-bold text-purple-400 mb-2">2026年1-4月：作品徵集</h3>
+                                <div class="space-y-2 text-sm text-gray-300">
+                                    <div>• 1月1日：正式開放作品提交</div>
+                                    <div>• 1-3月：全球巡迴技術工作坊</div>
+                                    <div>• 2月：在線大師課程系列啟動</div>
+                                    <div>• 3月：技術支持加強月</div>
+                                    <div>• 4月30日：作品提交截止</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item animate-slide-up">
+                            <div class="bg-yellow-500 bg-opacity-20 p-4 rounded-lg">
+                                <h3 class="text-lg font-bold text-yellow-400 mb-2">2026年5-8月：評審與頒獎</h3>
+                                <div class="space-y-2 text-sm text-gray-300">
+                                    <div>• 5月：初審工作開始</div>
+                                    <div>• 6月15日：入圍名單確定並公布</div>
+                                    <div>• 7月1-15日：終審評委現場評審</div>
+                                    <div>• 8月15日：第二屆香港AI國際電影節開幕</div>
+                                    <div>• 8月20日：思納普斯大獎賽頒獎典禮</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-20" id="partners">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">合作夥伴</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    與全球頂尖科技公司、品牌和媒體機構攜手，共同推動AI原生廣告的發展
+                </p>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center gradient-text">技術合作夥伴</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-gamepad text-4xl text-purple-400 mb-3"></i>
+                        <div class="font-semibold">Epic Games</div>
+                        <div class="text-sm text-gray-400">Unreal Engine 5</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-video text-4xl text-red-400 mb-3"></i>
+                        <div class="font-semibold">快手</div>
+                        <div class="text-sm text-gray-400">可靈 AI</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-cloud text-4xl text-yellow-400 mb-3"></i>
+                        <div class="font-semibold">Runway</div>
+                        <div class="text-sm text-gray-400">Gen-3 Alpha</div>
+                    </div>
+                    <!-- 修正：添加缺失的卡片 -->
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fab fa-google text-4xl text-blue-400 mb-3"></i>
+                        <div class="font-semibold">Google</div>
+                        <div class="text-sm text-gray-400">DeepMind & Veo</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-brain text-4xl text-green-400 mb-3"></i>
+                        <div class="font-semibold">OpenAI</div>
+                        <div class="text-sm text-gray-400">Sora & GPT</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-microchip text-4xl text-green-500 mb-3"></i>
+                        <div class="font-semibold">NVIDIA</div>
+                        <div class="text-sm text-gray-400">ACE & Omniverse</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center gradient-text">品牌合作夥伴</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fab fa-apple text-4xl text-gray-300 mb-3"></i>
+                        <div class="font-semibold">Apple</div>
+                        <div class="text-sm text-gray-400">創新設計獎</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fab fa-microsoft text-4xl text-blue-400 mb-3"></i>
+                        <div class="font-semibold">Microsoft</div>
+                        <div class="text-sm text-gray-400">AI整合獎</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-car text-4xl text-gray-400 mb-3"></i>
+                        <div class="font-semibold">Tesla</div>
+                        <div class="text-sm text-gray-400">未來科技獎</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-running text-4xl text-orange-400 mb-3"></i>
+                        <div class="font-semibold">Nike</div>
+                        <div class="text-sm text-gray-400">品牌精神獎</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-glass-whiskey text-4xl text-red-500 mb-3"></i>
+                        <div class="font-semibold">Coca-Cola</div>
+                        <div class="text-sm text-gray-400">全球傳播獎</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-8 text-center gradient-text">媒體合作夥伴</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-film text-4xl text-yellow-400 mb-3"></i>
+                        <div class="font-semibold">Variety</div>
+                        <div class="text-sm text-gray-400">娛樂產業權威</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-bullhorn text-4xl text-blue-400 mb-3"></i>
+                        <div class="font-semibold">Campaign</div>
+                        <div class="text-sm text-gray-400">廣告行業領先</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-laptop-code text-4xl text-green-400 mb-3"></i>
+                        <div class="font-semibold">TechCrunch</div>
+                        <div class="text-sm text-gray-400">科技創新報導</div>
+                    </div>
+                    <div class="card p-6 text-center animate-slide-up">
+                        <i class="fas fa-newspaper text-4xl text-purple-400 mb-3"></i>
+                        <div class="font-semibold">Wired</div>
+                        <div class="text-sm text-gray-400">科技文化雜誌</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="py-20 bg-gradient-to-r from-purple-900 to-blue-900" id="value">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6">參與價值</h2>
+                <p class="text-xl text-gray-200 max-w-3xl mx-auto">
+                    思納普斯大獎賽為不同類型的參與者提供獨特的價值主張
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card p-8 animate-slide-up">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-palette text-4xl text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold gradient-text">創作者/代理公司</h3>
+                    </div>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-3"></i>
+                            <span>展示尖端技能，建立行業領導地位</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-handshake text-blue-400 mt-1 mr-3"></i>
+                            <span>吸引頂級客戶，獲得高端商業機會</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-money-bill-wave text-green-400 mt-1 mr-3"></i>
+                            <span>獲得投資機會，加速業務發展</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-globe text-purple-400 mt-1 mr-3"></i>
+                            <span>全球曝光，建立國際聲譽</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 animate-slide-up">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-building text-4xl text-green-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold gradient-text">品牌方</h3>
+                    </div>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start">
+                            <i class="fas fa-flask text-blue-400 mt-1 mr-3"></i>
+                            <span>低風險的研發機會，探索營銷未來</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-users text-green-400 mt-1 mr-3"></i>
+                            <span>接觸頂尖創意人才和技術專家</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-bullhorn text-yellow-400 mt-1 mr-3"></i>
+                            <span>獲得寶貴的公關曝光和媒體關注</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-rocket text-purple-400 mt-1 mr-3"></i>
+                            <span>定義品牌在AI時代的創新形象</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 animate-slide-up">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-chart-line text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold gradient-text">投資者/機構</h3>
+                    </div>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start">
+                            <i class="fas fa-search text-blue-400 mt-1 mr-3"></i>
+                            <span>發現前沿技術和創新項目</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-network-wired text-green-400 mt-1 mr-3"></i>
+                            <span>建立行業聯繫和合作網絡</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-trophy text-yellow-400 mt-1 mr-3"></i>
+                            <span>參與行業標準制定和影響力建設</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-coins text-purple-400 mt-1 mr-3"></i>
+                            <span>把握AI+創意產業的投資先機</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submission Section -->
+    <section class="py-20" id="submit">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">立即報名參賽</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    成為AI原生廣告革命的先鋒，在歷史性的競賽中展現您的創意和技術實力
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="card p-8 animate-slide-up">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">參賽費用</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">標準參賽費</div>
+                                    <div class="text-sm text-gray-400">每件作品</div>
+                                </div>
+                                <div class="text-xl font-bold text-blue-400">$500</div>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">高級服務包</div>
+                                    <div class="text-sm text-gray-400">含技術支持</div>
+                                </div>
+                                <div class="text-xl font-bold text-green-400">$1,000</div>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">企業團體套餐</div>
+                                    <div class="text-sm text-gray-400">10件作品</div>
+                                </div>
+                                <div class="text-xl font-bold text-purple-400">$5,000</div>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-white bg-opacity-5 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">快速審核服務</div>
+                                    <div class="text-sm text-gray-400">48小時反饋</div>
+                                </div>
+                                <div class="text-xl font-bold text-yellow-400">$200</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8 animate-slide-up">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">報名流程</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">1</div>
+                                <div>
+                                    <h4 class="font-semibold">註冊賬號</h4>
+                                    <p class="text-gray-300 text-sm">在官網創建您的參賽者賬號</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">2</div>
+                                <div>
+                                    <h4 class="font-semibold">組建團隊</h4>
+                                    <p class="text-gray-300 text-sm">確保團隊包含創意實體和品牌合作夥伴</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">3</div>
+                                <div>
+                                    <h4 class="font-semibold">準備作品</h4>
+                                    <p class="text-gray-300 text-sm">創作AI原生廣告作品和流程文檔</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">4</div>
+                                <div>
+                                    <h4 class="font-semibold">提交參賽</h4>
+                                    <p class="text-gray-300 text-sm">在截止日期前提交完整參賽材料</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <div class="card p-8 mb-8 animate-fade-in">
+                        <h3 class="text-2xl font-bold mb-4 gradient-text">重要日期提醒</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">4月1日</div>
+                                <div class="font-semibold">開放報名</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-green-400 mb-2">6月30日</div>
+                                <div class="font-semibold">提交截止</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-yellow-400 mb-2">10月20日</div>
+                                <div class="font-semibold">頒獎典禮</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row justify-center">
+                        <a href="#" class="btn-gold px-8 py-4 rounded-full font-bold text-lg text-center">
+                            立即開始報名
+                        </a>
+                        <a href="#" class="btn-secondary px-8 py-4 rounded-full font-medium text-lg text-center">
+                            下載參賽指南
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-gray-900" id="contact">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold mb-6 section-title center">聯繫我們</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    有任何問題或需要支持？我們的專業團隊隨時為您服務
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-envelope text-3xl text-blue-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-3">商務合作</h3>
+                    <a href="mailto:business@aif.ad" class="text-blue-400 hover:text-blue-300">
+                        business@aif.ad
+                    </a>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-cogs text-3xl text-green-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-3">技術支持</h3>
+                    <a href="mailto:tech@aif.ad" class="text-green-400 hover:text-green-300">
+                        tech@aif.ad
+                    </a>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-newspaper text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-3">媒體咨詢</h3>
+                    <a href="mailto:media@aif.ad" class="text-purple-400 hover:text-purple-300">
+                        media@aif.ad
+                    </a>
+                </div>
+                
+                <div class="card p-6 text-center animate-slide-up">
+                    <i class="fas fa-question-circle text-3xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-3">一般咨詢</h3>
+                    <a href="mailto:info@aif.ad" class="text-yellow-400 hover:text-yellow-300">
+                        info@aif.ad
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">關注我們</h3>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-center mb-4">
+                        <div class="logo-font text-lg">AIF.AD</div>
+                        <div class="text-sm text-blue-400">思納普斯大獎賽</div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-center">
+                        全球首個AI原生廣告競賽平台，重新定義廣告的未來。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">競賽信息</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-blue-400">關於大賽</a></li>
+                        <li><a href="#categories" class="text-gray-400 hover:text-blue-400">獎項類別</a></li>
+                        <li><a href="#rules" class="text-gray-400 hover:text-blue-400">參賽規則</a></li>
+                        <li><a href="#timeline" class="text-gray-400 hover:text-blue-400">賽程安排</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">合作與支持</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#partners" class="text-gray-400 hover:text-blue-400">合作夥伴</a></li>
+                        <li><a href="#tech" class="text-gray-400 hover:text-blue-400">技術支持</a></li>
+                        <li><a href="#value" class="text-gray-400 hover:text-blue-400">參與價值</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-400">聯繫我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">主辦單位</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>香港AI國際電影節徵片中心</li>
+                        <li>香港AI國際電影節協會</li>
+                        <li>香港AI電影市場</li>
+                        <li>香港AI電影學院</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 香港AI國際電影節徵片中心. 版權所有 | 思納普斯大獎賽 SYNAPSE Awards</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add random data streams
+        function createDataStreams() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const stream = document.createElement('div');
+                    stream.className = 'data-stream';
+                    stream.style.left = Math.random() * 100 + '%';
+                    stream.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(stream);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        stream.remove();
+                    }, 4000);
+                }, i * 3000);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start data streams
+            createDataStreams();
+            setInterval(createDataStreams, 15000);
+            
+            // Add scroll animations
+            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        if (entry.target.classList.contains('animate-slide-up')) {
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                        if (entry.target.classList.contains('animate-fade-in')) {
+                            entry.target.style.transform = 'scale(1)';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                if (el.classList.contains('animate-slide-up')) {
+                    el.style.transform = 'translateY(50px)';
+                }
+                if (el.classList.contains('animate-fade-in')) {
+                    el.style.transform = 'scale(0.95)';
+                }
+                observer.observe(el);
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // Competition card hover effects
+            const competitionCards = document.querySelectorAll('.competition-card');
+            competitionCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Add dynamic number counting effect
+            const numbers = document.querySelectorAll('.stats-card .number');
+            const countUp = (element, target) => {
+                const increment = target / 100;
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (target >= 1000000000) {
+                        element.textContent = (current / 1000000000).toFixed(0) + '億';
+                    } else if (target >= 1000000) {
+                        element.textContent = (current / 1000000).toFixed(0) + '萬';
+                    } else if (target >= 1000) {
+                        element.textContent = (current / 1000).toFixed(1) + 'K';
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 30);
+            };
+            
+            // Trigger number animations when in view
+            const numberObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const text = entry.target.textContent;
+                        let target = 0;
+                        if (text.includes('$50萬')) target = 500000;
+                        else if (text.includes('50+')) target = 50;
+                        else if (text.includes('$950億')) target = 95000000000;
+                        else if (text.includes('2,500+')) target = 2500;
+                        
+                        if (target > 0) {
+                            entry.target.textContent = '0';
+                            setTimeout(() => countUp(entry.target, target), 500);
+                        }
+                        numberObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            numbers.forEach(num => numberObserver.observe(num));
+            
+            // Add floating animation to AI elements
+            const aiElements = document.querySelectorAll('.ai-element');
+            aiElements.forEach((element, index) => {
+                element.style.animation = `floating ${6 + index}s ease-in-out infinite`;
+                element.style.animationDelay = `${index * 0.5}s`;
+            });
+            
+            // Add progressive loading effect for cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            // Add particle effect on hero section
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = 'rgba(0, 255, 157, 0.5)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = '100%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1';
+                
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.appendChild(particle);
+                    
+                    // Animate particle
+                    let opacity = 0.5;
+                    let y = window.innerHeight;
+                    const speed = Math.random() * 2 + 1;
+                    
+                    const animate = () => {
+                        y -= speed;
+                        opacity -= 0.005;
+                        
+                        particle.style.transform = `translateY(${y - window.innerHeight}px)`;
+                        particle.style.opacity = opacity;
+                        
+                        if (opacity <= 0 || y < -10) {
+                            particle.remove();
+                        } else {
+                            requestAnimationFrame(animate);
+                        }
+                    };
+                    
+                    animate();
+                }
+            }
+            
+            // Create particles periodically
+            setInterval(createParticle, 300);
+            
+            // Add glow effect to buttons on hover
+            const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-gold');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 0 20px rgba(0, 255, 157, 0.5)';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            });
+            
+            // Add typing effect to main title
+            const mainTitle = document.querySelector('.hero h1');
+            if (mainTitle) {
+                const text = mainTitle.textContent;
+                mainTitle.textContent = '';
+                let i = 0;
+                
+                setTimeout(() => {
+                    const typeWriter = () => {
+                        if (i < text.length) {
+                            mainTitle.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 100);
+                        }
+                    };
+                    typeWriter();
+                }, 1000);
+            }
+            
+            // Add interactive hover effect to award cards
+            const awardCards = document.querySelectorAll('.competition-card');
+            awardCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 20px 40px rgba(255, 215, 0, 0.3)';
+                    this.style.borderColor = 'rgba(255, 215, 0, 0.5)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                    this.style.borderColor = '';
+                });
+            });
+            
+            // Add scroll progress indicator
+            const scrollProgress = document.createElement('div');
+            scrollProgress.style.position = 'fixed';
+            scrollProgress.style.top = '0';
+            scrollProgress.style.left = '0';
+            scrollProgress.style.width = '0%';
+            scrollProgress.style.height = '3px';
+            scrollProgress.style.background = 'linear-gradient(90deg, var(--primary), var(--accent), var(--secondary))';
+            scrollProgress.style.zIndex = '9999';
+            scrollProgress.style.transition = 'width 0.3s ease';
+            document.body.appendChild(scrollProgress);
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercent + '%';
+            });
+            
+            // Add dynamic background color change based on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                const hero = document.querySelector('.hero-bg');
+                if (hero) {
+                    hero.style.transform = `translateY(${rate}px)`;
+                }
+            });
+            
+            // Add counter animation for market data
+            const marketNumbers = document.querySelectorAll('#market .number');
+            const marketObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const text = element.textContent;
+                        let target = 0;
+                        
+                        if (text.includes('$950億')) {
+                            target = 950;
+                            element.textContent = '$0億';
+                            setTimeout(() => {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 15;
+                                    if (current >= target) {
+                                        current = target;
+                                        clearInterval(timer);
+                                    }
+                                    element.textContent = `${current}億`;
+                                }, 50);
+                            }, 300);
+                        } else if (text.includes('$3,200億')) {
+                            target = 3200;
+                            element.textContent = '$0億';
+                            setTimeout(() => {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 50;
+                                    if (current >= target) {
+                                        current = target;
+                                        clearInterval(timer);
+                                    }
+                                    element.textContent = `${current.toLocaleString()}億`;
+                                }, 50);
+                            }, 600);
+                        } else if (text.includes('67%')) {
+                            target = 67;
+                            element.textContent = '0%';
+                            setTimeout(() => {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 1;
+                                    if (current >= target) {
+                                        current = target;
+                                        clearInterval(timer);
+                                    }
+                                    element.textContent = `${current}%`;
+                                }, 30);
+                            }, 900);
+                        }
+                        
+                        marketObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            marketNumbers.forEach(num => marketObserver.observe(num));
+            
+            // Add interactive timeline
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            timelineItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-30px)';
+                item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                timelineObserver.observe(item);
+            });
+            
+            // Add logo animation
+            const logo = document.querySelector('.logo-font');
+            if (logo) {
+                logo.addEventListener('click', () => {
+                    logo.style.animation = 'none';
+                    setTimeout(() => {
+                        logo.style.animation = 'logoGlow 3s ease-in-out infinite alternate';
+                    }, 10);
+                });
+            }
+            
+            // Add synapse logo pulse effect
+            const synapseLogo = document.querySelector('.synapse-logo');
+            if (synapseLogo) {
+                synapseLogo.addEventListener('mouseenter', () => {
+                    synapseLogo.style.transform = 'scale(1.1)';
+                    synapseLogo.style.transition = 'transform 0.3s ease';
+                });
+                synapseLogo.addEventListener('mouseleave', () => {
+                    synapseLogo.style.transform = 'scale(1)';
+                });
+            }
+            
+            // Add form validation for contact
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const email = link.getAttribute('href').replace('mailto:', '');
+                    navigator.clipboard.writeText(email).then(() => {
+                        // Show copied notification
+                        const notification = document.createElement('div');
+                        notification.textContent = `已複製 ${email} 到剪貼板`;
+                        notification.style.position = 'fixed';
+                        notification.style.top = '20px';
+                        notification.style.right = '20px';
+                        notification.style.background = 'rgba(0, 255, 157, 0.9)';
+                        notification.style.color = '#000';
+                        notification.style.padding = '12px 20px';
+                        notification.style.borderRadius = '8px';
+                        notification.style.fontWeight = 'bold';
+                        notification.style.zIndex = '10000';
+                        notification.style.animation = 'fadeIn 0.3s ease';
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 3000);
+                    });
+                });
+            });
+            
+            // Add Easter egg - konami code
+            let konamiCode = [];
+            const correctCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+            
+            document.addEventListener('keydown', (e) => {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > correctCode.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.length === correctCode.length && 
+                    konamiCode.every((code, index) => code === correctCode[index])) {
+                    // Easter egg activated
+                    document.body.style.animation = 'rainbow 2s ease infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                    }, 10000);
+                }
+            });
+            
+            // Add CSS for rainbow animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rainbow {
+                    0% { filter: hue-rotate(0deg); }
+                    25% { filter: hue-rotate(90deg); }
+                    50% { filter: hue-rotate(180deg); }
+                    75% { filter: hue-rotate(270deg); }
+                    100% { filter: hue-rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Add performance monitoring
+            console.log('🎬 AIF.AD - 思納普斯大獎賽網站已載入完成');
+            console.log('🚀 頁面載入時間:', window.performance.now(), 'ms');
+            
+            // Add social media sharing functionality
+            const shareButtons = document.querySelectorAll('.social-share');
+            shareButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = encodeURIComponent(window.location.href);
+                    const text = encodeURIComponent('參加思納普斯大獎賽 - 全球首個AI原生廣告競賽！');
+                    
+                    if (navigator.share) {
+                        navigator.share({
+                            title: '思納普斯大獎賽',
+                            text: text,
+                            url: window.location.href
+                        });
+                    } else {
+                        // Fallback to copy URL
+                        navigator.clipboard.writeText(window.location.href);
+                        alert('網址已複製到剪貼板！');
+                    }
+                });
+            });
+        });
+        
+        // Add service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
